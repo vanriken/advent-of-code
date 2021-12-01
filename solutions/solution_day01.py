@@ -20,7 +20,7 @@ if selection == "PART1":
 	test3 = [1,2,3,4]
 	test4 = [9,1,2,1,2,1,2,9]
 
-	# uncomment the next line to check the examples
+	# uncomment the next line to use a test input
 	#digits = test1
 
 	s = 0
@@ -47,7 +47,7 @@ elif selection == "PART2":
 	test4 = [1,2,3,1,2,3]
 	test5 = [1,2,1,3,1,4,1,5]
 
-	# uncomment the next line to check the examples
+	# uncomment the next line to use a test input
 	#digits = test3
 
 	# calculate size of step to the digit halfway around the list
