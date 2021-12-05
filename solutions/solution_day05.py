@@ -32,8 +32,7 @@ def exit_instructions_maze(instructions, complex_rule=False):
 
 		:param instruction: a list containing the offsets for each jump
 		:param complex_rule: when it is True, the function uses the complex rule
-		:return steps: the number of steps it takes to exit
-		:return idx: the value of idx after exiting
+		:return steps: the number of steps it takes to reach the exit
 	"""
 	
 	idx = 0
