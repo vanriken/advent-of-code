@@ -14,8 +14,7 @@ def get_input(filepath):
 		:return instructions: a numpy array containing the offsets for each jump  
 	"""
 	with open(filepath) as f:
-		# use a numpy array, it is way faster than a python list
-		instructions = np.array([int(number) for number in f])
+		instructions = [int(number) for number in f]
 
 	return instructions
 	
@@ -24,11 +23,8 @@ def exit_instructions_maze(instructions, complex_rule=False):
 	""" Interpret the instructions contained in 'instructions' and exit the
 		maze of instructions.
 
-		There are two rules for the jumps
-		normal: After each jump, the offset of that instruction is incremented 
-		by one.
-		complex: After each jump, if the offset was three or more, the offset 
-		of that instruction is decremented by one. Else it is incremented by one.
+		There are two rules for the jumps, normal and complex. 
+		See the implementation for details.
 
 		:param instruction: a list containing the offsets for each jump
 		:param complex_rule: when it is True, the function uses the complex rule
@@ -37,6 +33,7 @@ def exit_instructions_maze(instructions, complex_rule=False):
 	
 	idx = 0
 	steps = 0
+	instructions = np.array(instructions) # np.array is faster
 	length = len(instructions)
 
 	while idx < length and idx >= 0:
