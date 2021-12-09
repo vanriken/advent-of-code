@@ -152,7 +152,7 @@ def parse_text(text):
 	.\((\d*)\)			# weight, group 2	
 	(.->.)?				# arrow, optional, group 3
 	(.*)?				# children programs, group 4
-	)				# 
+	)
 	''', re.VERBOSE)
 
 	data = towerProgramRegex.findall(text)
