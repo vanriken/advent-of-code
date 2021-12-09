@@ -39,8 +39,10 @@ class ProgramCollection():
 			weight = int(match[2])
 			children = match[4].split(', ')
 			children = list(filter(lambda x: x != '', children))
+
 			self.programs[name] = Program(name, weight, children)
 
+		# assign parent programs
 		for name in self.programs.keys():
 			children = self.programs[name].children
 			for child in children:
@@ -102,19 +104,19 @@ class ProgramCollection():
 		children = self.programs[name].children
 		subtower_weights = [
 			self.calculate_weight_subtower(child) for child in children]
-		delta = max(subtower_weights) - min(subtower_weights)
 
 		# get the least common element in subtower weights and its index
 		counter = Counter(subtower_weights)
-		least_common_element = min(counter, key=counter.get)
-		least_common_idx = subtower_weights.index(least_common_element)
+		least_common_element, least_common_idx = \
+			self.get_least_common_element(subtower_weights)
 		name = children[least_common_idx]
 
-		# is the needed weight compensation positive or negative?
+		# is the weight of the unbalanced tree too high or too low?
+		weight_delta = max(subtower_weights) - min(subtower_weights)
 		if least_common_element == max(subtower_weights):
-			weight_delta = -delta
+			weight_delta = -weight_delta
 		else:
-			weight_delta = delta
+			pass
 
 		while True:
 
@@ -130,15 +132,24 @@ class ProgramCollection():
 				return(name, weight_delta)
 			else:
 				# else continue in the subtree that contains the wrong weight
-				counter = Counter(subtower_weights)
-				least_common_element = min(counter, key=counter.get)
-				least_common_idx = subtower_weights.index(least_common_element)
+				least_common_element, least_common_idx = \
+					self.get_least_common_element(subtower_weights)
 				name = children[least_common_idx] # move to subtree
 
 	def get_program_weight(self,name):
 		""" Returns the weight of a program in the program tree """
 
 		return self.programs[name].weight
+
+	@staticmethod
+	def get_least_common_element(lst):
+		""" Returns the lest common element of a list and its index. """
+
+		counter = Counter(lst)
+		least_common_element = min(counter, key=counter.get)
+		idx = lst.index(least_common_element)
+
+		return(least_common_element, idx)
 
 
 def parse_text(text):
