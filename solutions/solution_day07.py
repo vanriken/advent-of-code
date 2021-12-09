@@ -143,7 +143,7 @@ class ProgramCollection():
 
 	@staticmethod
 	def get_least_common_element(lst):
-		""" Returns the lest common element of a list and its index. """
+		""" Returns the least common element of a list and its index. """
 
 		counter = Counter(lst)
 		least_common_element = min(counter, key=counter.get)
