@@ -14,18 +14,15 @@ class ProgramGroup():
 	def execute_dance_move(self, move):
 
 		if move[0] == 's':
-
 			# get the spint amount from the dance move
 			spin = int(move[1:])
 			logging.debug(f'Spin ({spin})')
 			self.execute_spin(spin)
-
 		elif move[0] == 'x':
 			# get the indices of the programs that must change position
 			idx1, idx2 = map(int, move[1:].split('/'))
 			logging.debug(f'Exchange ({idx1},{idx2})')
 			self.execute_exchange(idx1, idx2)
-
 		elif move[0] == 'p':
 			# get the names of the programs that must change position
 			name1, name2 = move[1:].split('/')
@@ -84,10 +81,8 @@ def part2():
 
 	number_of_programs = 16
 	pg = ProgramGroup(number_of_programs)
-
 	# number of dances that must be executed
 	number_of_dances = 10**9
-
 	# counter for the number of dances
 	dance_counter = 0
 
