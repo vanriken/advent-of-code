@@ -59,10 +59,7 @@ def part2():
 		if i % (5 * 10**6) == 0:
 			logging.debug(f'progress: {i//10**6} / {max_val//10**6} (in millions).')
 		
-		
 	print(f'PART2: The value after 0 is {val_after_zero}')
-
-
 
 if __name__ == '__main__':
 	part1()
