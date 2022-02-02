@@ -49,32 +49,26 @@ def read_data(filepath):
 
 def grid_permutations(grid):
 
-    ''' Permutates the input grid by rotating it, flipping it horizontally
-        and flipping it vertically. Returns a generator object with all the 
-        permutations.
+    ''' Permutates the input grid by rotating it, and flipping it vertically. 
+        Returns a generator object with all the permutations.
 
         rotation (degrees): 0, 90, 180, 270
-        flip horizontally (left/right): no, yes
         flip vertically (up/down): no, yes 
-        number of permutations: 4*2*2 = 16
+        flip horizontally (left/right): no, yes - NOT NEEDED
+
+        number of permutations: 4*2 = 8
     '''
 
     for rot_amount in range(0,4):
         for flip_vert in [False, True]:
-            for flip_hor in [False, True]:
-                # rotate the matrix
-                temp = np.rot90(grid, k=rot_amount)
-                # flip vertically
-                if flip_vert == True:
-                    temp = np.flipud(temp)
-                else: 
-                    pass
-                # flip horizontally
-                if flip_hor == True:
-                    temp = np.fliplr(temp)
-                else:
-                    pass
-                yield temp
+            # rotate the matrix
+            temp = np.rot90(grid, k=rot_amount)
+            # flip vertically
+            if flip_vert == True:
+                temp = np.flipud(temp)
+            else: 
+                pass
+            yield temp
 
 
 def decompose_grid(grid, size_subgrid):
@@ -171,7 +165,7 @@ def main():
     input_pattern, output_pattern = read_data('../input/input_day21.txt')
 
     grid = np.array([[0,1,0],[0,0,1],[1,1,1]])
-    n_iterations = 5
+    n_iterations = 18
 
     for i in range(n_iterations):
         grid = enhance_grid(grid, input_pattern, output_pattern)
