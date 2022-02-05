@@ -45,9 +45,9 @@ def get_grid(arr, n_iter):
 def change_direction(direction, turn_direction):
 
     if turn_direction == 'RIGHT':
-        direction = (direction+1)%4
+        direction = Direction((direction.value+1)%4)
     elif turn_direction == 'LEFT': 
-        direction = (direction-1)%4
+        direction = Direction((direction.value-1)%4)
     else:
         raise Exception(f'turn_direction "{turn_direction}" is not supported')
 
@@ -71,14 +71,14 @@ def main():
         # turn right is current node is infected, otherwise turn left
         if grid[row,col] == NodeStatus.INFECTED:
             direction = change_direction(direction,'RIGHT')
+            grid[row,col] = NodeStatus.CLEAN
+
         elif grid[row,col] == NodeStatus.CLEAN:
             direction = change_direction(direction,'LEFT')
-            infections += 1 # clean node will become infected
+            grid[row,col] = NodeStatus.INFECTED
+            infections += 1
         else:
             raise Exception('node status is invalid')
-
-        # update the state of the current node
-        grid[row,col] = (grid[row,col] + 1) % 2
                                
         # virus carrier moves forward one step
         if direction == Direction.UP:

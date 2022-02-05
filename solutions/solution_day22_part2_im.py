@@ -33,8 +33,10 @@ def read_input(filepath):
         for col_idx, node in enumerate(row):
             if node == '#':
                 # row gives position on y-axis, col gives position on x-axis
-                # up: decrease in row_idx, right: increase in col_idx
-                data[col_idx - row_idx * 1j] = 2
+                # y: decrease in row_idx, x: increase in col_idx
+                x = col_idx
+                y = -row_idx 
+                data[x+y*1j] = 2
     
     return data, center
 
@@ -43,9 +45,9 @@ def main():
 
     data, m = read_input('../input/input_day22.txt')
     
-    pos = m - m * 1j
+    pos = m-m*1j
     # starting direction is up
-    direction = 0 + 1j   
+    direction = 0+1j   
 
     n = 10000000
     infections = 0
@@ -55,17 +57,22 @@ def main():
         # turn right is current node is infected, otherwise turn left
         if data[pos] == NodeStatus.CLEAN:
             direction = direction * 1j
+            data[pos] = NodeStatus.WEAKENED
+
         elif data[pos] == NodeStatus.WEAKENED:
-            infections += 1 # weakened node will become infected
+            data[pos] = NodeStatus.INFECTED
+            infections += 1
+
         elif data[pos] == NodeStatus.INFECTED:
             direction = direction * (-1j)
+            data[pos] = NodeStatus.FLAGGED
+
         elif data[pos] == NodeStatus.FLAGGED:
             direction = -direction
+            data[pos] = NodeStatus.CLEAN
+
         else:
             raise Exception('node status is invalid')
-
-        # modify the state of the current node
-        data[pos] = (data[pos] + 1) % 4
                   
         # virus carrier moves forward one step
         pos = pos + direction

@@ -34,7 +34,9 @@ def read_input(filepath):
             if node == '#':
                 # row gives position on y-axis, col gives position on x-axis
                 # up: decrease in row_idx, right: increase in col_idx
-                data[(col_idx, -row_idx)] = 2
+                x = col_idx
+                y = -row_idx
+                data[(x, y)] = 2
     
     return data, center
 
@@ -42,11 +44,11 @@ def read_input(filepath):
 def change_direction(direction, turn_direction):
 
     if turn_direction == 'RIGHT':
-        direction = (direction+1)%4
+        direction = Direction((direction.value+1)%4)
     elif turn_direction == 'LEFT': 
-        direction = (direction-1)%4
+        direction = Direction((direction.value-1)%4)
     elif turn_direction == 'REVERSE':
-        direction = (direction+2)%4
+        direction = Direction((direction.value+2)%4)
     else:
         raise Exception(f'turn_direction "{turn_direction}" is not supported')
 
@@ -67,17 +69,22 @@ def main():
         # turn right is current node is infected, otherwise turn left
         if data[(x,y)] == NodeStatus.CLEAN:
             direction = change_direction(direction,'LEFT')
+            data[(x,y)] = NodeStatus.WEAKENED
+
         elif data[(x,y)] == NodeStatus.WEAKENED:
-            infections += 1 # weakened node will become infected
+            data[(x,y)] = NodeStatus.INFECTED
+            infections += 1
+
         elif data[(x,y)] == NodeStatus.INFECTED:
             direction = change_direction(direction,'RIGHT')
+            data[(x,y)] = NodeStatus.FLAGGED
+
         elif data[(x,y)] == NodeStatus.FLAGGED:
             direction = change_direction(direction,'REVERSE')
+            data[(x,y)] = NodeStatus.CLEAN
+
         else:
             raise Exception('node status is invalid')
-
-        # modify the state of the current node
-        data[(x,y)] = (data[(x,y)] + 1) % 4
                   
         # virus carrier moves forward one step
         if direction == Direction.UP:
