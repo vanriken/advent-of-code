@@ -1,4 +1,7 @@
-# solution day <day-number> https://adventofcode.com/2015/day/<day-number>
+# solution file for day <day-number>
+# puzzle description: https://adventofcode.com/2015/day/<day-number>
+# puzzle input: https://adventofcode.com/2015/day/<day-number>/input
+
 from logger_setup import setup_logging
 import logging
 import time
