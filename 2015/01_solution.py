@@ -5,7 +5,7 @@ import time
 
 
 def solve_part_1():
-    with open("01-input.txt") as f:
+    with open("01_input.txt") as f:
         instructions = f.read()
 
     go_up_count = instructions.count("(")
@@ -17,7 +17,7 @@ def solve_part_1():
 
 
 def solve_part_2():
-    with open("01-input.txt") as f:
+    with open("01_input.txt") as f:
         instructions = f.read()
 
     position = 0

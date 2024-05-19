@@ -9,8 +9,8 @@ fi
 day=$1
 padded_day=$(printf "%02d" "${day}")
 
-input_filename="${padded_day}-input.txt"
-solution_filename="${padded_day}-solution.py"
+input_filename="${padded_day}_input.txt"
+solution_filename="${padded_day}_solution.py"
 
 touch ${input_filename}
 cp "solution_template.py" -- "${solution_filename}"
