@@ -13,7 +13,7 @@ input_filename="${padded_day}_input.txt"
 solution_filename="${padded_day}_solution.py"
 
 touch ${input_filename}
-cp "solution_template.py" -- "${solution_filename}"
+cp "solution_template.py" "${solution_filename}"
 
 # Replace some strings in the solution file
 sed -i "s/<day-number>/${day}/g" "${solution_filename}"
