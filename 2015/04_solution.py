@@ -53,6 +53,7 @@ if __name__ == "__main__":
 
     # Record a start time
     start_time = time.time()
+
     solve_part_1()
     solve_part_2()
 
