@@ -6,28 +6,25 @@ from logger_setup import setup_logging
 import logging
 import time
 
+# Set up logging
+setup_logging("DEBUG")
+
+# Create a logger
+logger = logging.getLogger(__name__)
+
+with open("<input-file>") as f:
+    data = f.read()
+
 
 def solve_part_1():
-    with open("<input-file>") as f:
-        data = f.read()
-
-    logger.info(f"<solution>")
+    logger.info(f"<part1-solution>")
 
 
 def solve_part_2():
-    with open("<input-file>") as f:
-        data = f.read()
-
-    logger.info(f"<solution>")
+    logger.info(f"<part2-solution>")
 
 
 if __name__ == "__main__":
-
-    # Set up logging
-    setup_logging("DEBUG")
-
-    # Create a logger
-    logger = logging.getLogger(__name__)
 
     # Record a start time
     start_time = time.time()
